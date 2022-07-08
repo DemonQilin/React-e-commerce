@@ -8,13 +8,13 @@ const ProductCard = ({ product }) => {
     }
 
     return (
-        <artticle className="Home__product">
+        <article className="Home__product">
             <h3 onClick={navigateToProduct}>{product.title}</h3>
             <div className="Product__body">
                 <h4>Price</h4>
                 <p>{product.price}</p>
             </div>
-        </artticle>
+        </article>
     )
 }
 

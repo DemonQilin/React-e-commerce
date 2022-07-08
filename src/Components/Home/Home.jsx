@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../../store/slices/products.slice';
-import ProductCard from './ProductCard';
+import React from 'react'
+import { Outlet } from 'react-router';
+import ListCategories from './ListCategories';
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const products = useSelector(state => state.products);
-
-    useEffect(() => {
-        dispatch(getProducts());
-    },[])
-
     return (
         <>
-            <aside className="Home__filters"></aside>
+            <aside className="Home__filters">
+                <ListCategories/>
+            </aside>
             <section className="Home__container-products">
-                {products?.map(product => <ProductCard key={product.id} product={product}/>)}
+                <Outlet />
             </section>
         </>
     )

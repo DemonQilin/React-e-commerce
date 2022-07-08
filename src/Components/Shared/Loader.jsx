@@ -4,7 +4,7 @@ import './styles/Loader.css'
 const Loader = () => {
     return (
         <div className="Loader">
-            <div class="Loader__loader">Loading...</div>
+            <div className="Loader__loader">Loading...</div>
         </div>
     )
 }
