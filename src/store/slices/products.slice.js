@@ -6,7 +6,7 @@ import { loadingFalse, loadingTrue } from "./loading.slice";
 
 const productsSlice = createSlice({
     name: 'products',
-    initialState: [],
+    initialState: null,
     reducers: {
         setGlobalProducts: (state, action) => action.payload
     },
