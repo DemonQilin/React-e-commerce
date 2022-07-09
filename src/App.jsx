@@ -6,6 +6,8 @@ import Home from './Components/Home/Home'
 import ProductScreen from './Components/ProductScreen.jsx/ProductScreen'
 import Header from './Components/Shared/Header'
 import Loader from './Components/Shared/Loader'
+import ProtectedRoute from './Components/Shared/ProtectedRoute'
+import Login from './Components/Login/Login'
 
 function App() {
   const loading = useSelector(state => state.loading);
@@ -19,8 +21,8 @@ function App() {
             <Route index element={<CategoryProducts/>}/>
             <Route path='category/:category' element={<CategoryProducts/>}/>
           </Route>
-          <Route path='/login' element={<div>Login</div>} />
-          <Route path='/purchases' element={<div>Compras</div>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/purchases' element={<ProtectedRoute><div>Compras</div></ProtectedRoute>} />
           <Route path='/product/:id' element={<ProductScreen/>} />
         </Routes>
       </main>
