@@ -8,6 +8,7 @@ import Header from './Components/Shared/Header'
 import Loader from './Components/Shared/Loader'
 import ProtectedRoute from './Components/Shared/ProtectedRoute'
 import Login from './Components/Login/Login'
+import Purchases from './Components/Purchases/Purchases'
 
 function App() {
   const loading = useSelector(state => state.loading);
@@ -22,7 +23,7 @@ function App() {
             <Route path='category/:category' element={<CategoryProducts/>}/>
           </Route>
           <Route path='/login' element={<Login />} />
-          <Route path='/purchases' element={<ProtectedRoute><div>Compras</div></ProtectedRoute>} />
+          <Route path='/purchases' element={<ProtectedRoute><Purchases/></ProtectedRoute>} />
           <Route path='/product/:id' element={<ProductScreen/>} />
         </Routes>
       </main>
