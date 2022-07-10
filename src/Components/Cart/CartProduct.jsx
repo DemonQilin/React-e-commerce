@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux';
-import { deleteProductCart, updateProductCart } from '../../store/slices/cart.slice';
+import { deleteProductCart } from '../../store/slices/cart.slice';
+import useAddOrUpdateCart from '../hooks/useAddOrUpdateCart';
 
 const CartProduct = ({ product }) => {
-    const [quantity, setQuantity] = useState(product.productsInCart.quantity);
     const dispatch = useDispatch();
+    const { addOrUpdateCart, plusQuantity, minusQuantity, quantity } = useAddOrUpdateCart(product);
 
     return (
         <article className="CarProduct">
@@ -14,11 +15,11 @@ const CartProduct = ({ product }) => {
             <div className="CartProduct__container">
                 <h4 className="CartProduct__subtitle">Cantidad</h4>
                 <div className="Cart__container">
-                    <button className="CartProduct__btn" onClick={e => setQuantity(quantity => quantity === 1 ? 1 : quantity - 1)}>-</button>
-                    <p className="CartProduct__paragraph">{quantity}</p>
-                    <button className="CartProduct__btn" onClick={e => setQuantity(quantity + 1)}>+</button>
+                    <button className="CartProduct__btn" onClick={minusQuantity}>-</button>
+                    <span className="CartProduct__span">{quantity}</span>
+                    <button className="CartProduct__btn" onClick={plusQuantity}>+</button>
                 </div>
-                <button className="CartProduct__btn" onClick={e => dispatch(updateProductCart(product.id, quantity))}>Actualizar Cantidad</button>
+                <button className="CartProduct__btn" onClick={addOrUpdateCart}>Actualizar Cantidad</button>
             </div>
             <div className="CartProduct__container">
                 <h4 className="CartProduct__subtitle">Total:</h4>

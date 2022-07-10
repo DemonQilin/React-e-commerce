@@ -1,31 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router';
 import CategoryProducts from '../Shared/CategoryProducts';
+import QuantyControl from '../Shared/QuantyControl';
 
 const ProductScreen = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
-    const logged = useSelector(state => state.logged);
     const [product, setProduct] = useState(useLocation().state);
-    const [quantity, setQuantity] = useState(1);
-
-    const addProductToCart = e => {
-        if (!logged) {
-            navigate('/login');
-            return;
-        }
-    }
 
     useEffect(() => {
+        document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
         if (!product) {
             axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products/${id}`)
                 .then(res => res.data.data.product)
                 .then(product => setProduct(product))
                 .catch(err => {
                     if (err.response) {
-                        setProduct({title: 'Producto no encontrado'});
+                        setProduct({ title: 'Producto no encontrado' });
                         console.log(err.response.data);
                         console.log(err.response.status);
                     }
@@ -33,8 +24,7 @@ const ProductScreen = () => {
 
             return
         }
-
-    },[])
+    }, []);
 
     return (
         <section className="ProductScreen">
@@ -51,13 +41,8 @@ const ProductScreen = () => {
                     </div>
                     <div className="ProductScreen__value__quanty">
                         <h3 className="ProductScreen__subtitle">Quanty</h3>
-                        <div className="ProductScreen__value__control">
-                            <span onClick={e => setQuantity(quantity => quantity === 1 ? 1 : quantity - 1)}>-</span>
-                            <span>{quantity}</span>
-                            <span onClick={e => setQuantity(quantity + 1)}>+</span>
-                        </div>
+                        <QuantyControl product={product} />
                     </div>
-                    <button className='ProductScreen__btn' onClick={addProductToCart}>Agregar al carrito</button>
                 </div>
             </div>
             <aside className='ProductScreen__aside'>
