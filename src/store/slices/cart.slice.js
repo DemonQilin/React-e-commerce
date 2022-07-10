@@ -4,7 +4,7 @@ import getConfigure from "../../utils/getConfigure";
 import { loadingFalse, loadingTrue } from "./loading.slice";
 
 const url = 'https://ecommerce-api-react.herokuapp.com/api/v1/cart';
-const managmentError = error => {
+const managmentError = (error, dispatch) => {
     if (error.response) {
         console.log(error.response.data);
         console.log(error.response.status);
@@ -50,7 +50,7 @@ export const addProductCart = (id, quantity) => async dispatch => {
 
         if (res === "success") dispatch(getCart());
     } catch (error) {
-        managmentError(error);
+        managmentError(error, dispatch);
     }
 };
 
@@ -61,7 +61,7 @@ export const updateProductCart = (id, newQuantity) => async dispatch => {
 
         if (res.status === 204) dispatch(getCart());
     } catch (error) {
-        managmentError(error);
+        managmentError(error, dispatch);
     }
 };
 
@@ -71,7 +71,7 @@ export const deleteProductCart = id => async dispatch => {
         const res = await axios.delete(`${url}/${id}`, getConfigure());
         if (res.status === 204) dispatch(getCart());
     } catch (error) {
-        managmentError(error);
+        managmentError(error, dispatch);
     }
 };
 
