@@ -36,7 +36,7 @@ const PurchaseCard = ({ purchase }) => {
 
     return (
         <article className="PurchaseCard">
-            <h3 className='PurchaseCard__title'><time dateTime={purchase.updatedAt}>{`${getMonth(date.getMonth())} ${date.getDay()}, ${date.getFullYear()} - ${date.toLocaleTimeString()}`}</time></h3>
+            <h3 className='PurchaseCard__title'><time dateTime={purchase.updatedAt}>{`${getMonth(date.getMonth())} ${date.getDate()}, ${date.getFullYear()} - ${date.toLocaleTimeString()}`}</time></h3>
             <ul className="PurchaseCard__list">
                 {purchase.cart.products.map(product => (
                     <li key={product.id} className='PurchaseCard__item'>
