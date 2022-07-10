@@ -1,0 +1,30 @@
+.Cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    height: 100vh;
+    width: 100vw;
+    min-width: 320px;
+    max-width: 382px;
+    padding: 1rem;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(calc(100% + 10px));
+    background-color: #fff;
+
+    transition: transform 0.3s ease-in-out;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+
+.Cart.open {
+    transform: translateX(0);
+}
+
+.Cart__btn--close {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

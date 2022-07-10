@@ -9,13 +9,19 @@ import Loader from './Components/Shared/Loader'
 import ProtectedRoute from './Components/Shared/ProtectedRoute'
 import Login from './Components/Login/Login'
 import Purchases from './Components/Purchases/Purchases'
+import { useRef } from 'react'
+import Cart from './Components/Cart/Cart'
 
 function App() {
   const loading = useSelector(state => state.loading);
+  const $btnCart = useRef();
+  const handlerBtnCart = e => {
+    $btnCart.current.classList.toggle('open');
+  }
 
   return (
     <div className="App">
-      <Header />
+      <Header handlerBtnCart={handlerBtnCart} />
       <main>
         <Routes>
           <Route path='/' element={<Home />}>
@@ -26,6 +32,7 @@ function App() {
           <Route path='/purchases' element={<ProtectedRoute><Purchases/></ProtectedRoute>} />
           <Route path='/product/:id' element={<ProductScreen/>} />
         </Routes>
+        <Cart $btnCart={$btnCart} />
       </main>
       {loading && <Loader />}
     </div>
