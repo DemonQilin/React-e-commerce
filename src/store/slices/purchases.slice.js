@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import getConfigure from "../../utils/getConfigure";
+import { getCart } from "./cart.slice";
 import { loadingFalse, loadingTrue } from "./loading.slice";
 
 const url = 'https://ecommerce-api-react.herokuapp.com/api/v1/purchases';
@@ -41,8 +42,12 @@ export const addPurchase = () => async dispatch => {
         references: "CC La Central"
     };
     try {
-        const res = await axios.post(url, body, getConfigure()).then(res => res.data);
-        dispatch(getPurchases());
+        const res = await axios.post(url, body, getConfigure()).then(res => res.data.status);
+        
+        if (res === "success") {
+            dispatch(getPurchases());
+            dispatch(getCart());
+        }
     } catch (error) {
         if (error.response) {
             console.log(error.response.data);

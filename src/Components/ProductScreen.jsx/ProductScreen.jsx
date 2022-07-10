@@ -31,17 +31,17 @@ const ProductScreen = () => {
             <h2 className="ProductScreen__title">{product?.title}</h2>
             <div className="ProductScreen__body">
                 <div className="ProductScreen__container-img">
-                    {product.productImgs?.map((img, i) => <img key={i} src={img} title={`${product.title} #${i}`} height='300px'/>)}
+                    {product?.productImgs.map((img, i) => <img key={i} src={img} title={`${product.title} #${i}`} height='300px'/>)}
                 </div>
-                <p className="ProductScreen__pharagraph">{product.description}</p>
+                <p className="ProductScreen__pharagraph">{product?.description}</p>
                 <div className="ProductScreen__value">
                     <div className="ProductScreen__value__price">
                         <h3 className="ProductScreen__subtitle">Price</h3>
-                        <p className="ProductScreen__pharagraph"><strong>${product.price}</strong></p>
+                        <p className="ProductScreen__pharagraph"><strong>${product?.price}</strong></p>
                     </div>
                     <div className="ProductScreen__value__quanty">
                         <h3 className="ProductScreen__subtitle">Quanty</h3>
-                        <QuantyControl product={product} />
+                        {product && <QuantyControl product={product} />}
                     </div>
                 </div>
             </div>
